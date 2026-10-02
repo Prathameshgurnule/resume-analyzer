@@ -1,0 +1,48 @@
+# Environment / Secrets
+.env
+.env.*
+!.env.example
+
+# Java / Maven
+target/
+*.class
+*.jar
+*.war
+*.log
+
+# Node
+node_modules/
+dist/
+.vite/
+
+# IDE
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Docker
+docker-compose.override.yml
+# Eclipse workspace
+.metadata/
+
+# Backup archives
+*.zip
+# Application uploads
+uploads/
+
+# Local debug files
+error.txt
+logs.txt

@@ -1,0 +1,47 @@
+services:
+
+  postgres:
+    image: postgres:18
+    container_name: postgres-resume
+    environment:
+      POSTGRES_DB: resume_analyzer
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    networks:
+      - resume-network
+
+  backend:
+    image: resume-backend:latest
+    container_name: resume-backend
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/resume_analyzer
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+    depends_on:
+      - postgres
+    networks:
+      - resume-network
+
+  frontend:
+    image: resume-frontend:latest
+    container_name: resume-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    networks:
+      - resume-network
+
+networks:
+  resume-network:
+
+volumes:
+  postgres_data:
+
